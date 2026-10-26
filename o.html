@@ -1,17 +1,24 @@
-  <!doctype html>
-  <html lang="ja">
+<!doctype html>
+<html lang="ja">
   <head>
-  <meta charset="utf-8">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'">
-  <title>Open</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'">
+    <title>Open</title>
   </head>
   <body>
-  <a href="unipa://open">開く</a>
-  <script>
-  location.replace("unipa://open");
-  setTimeout(function () { window.close(); }, 300);
-  </script>
+    <a href="unipa://open">開く</a>
+    <script>
+      var q = new URLSearchParams(location.search);
+      var to = q.get("to"), c = q.get("c");
+      var url = "unipa://open";
+      if (to === "m" || to === "t") {
+        url += "?to=" + to;
+        if (c && /^[A-Z]\d{3}-\d{2}$/.test(c)) url += "&c=" + c;
+      }
+      location.replace(url);
+      setTimeout(function () { window.close(); }, 300);
+    </script>
   </body>
-  </html>
+</html>
